@@ -7,5 +7,6 @@ public enum LineItemType
     Large,
     ExtraLarge,
     Heavy,
-    SpeedyShipping
+    SpeedyShipping,
+    Discount
 }

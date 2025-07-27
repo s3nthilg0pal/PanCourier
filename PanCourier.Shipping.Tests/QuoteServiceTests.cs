@@ -9,12 +9,17 @@ public class QuoteServiceTests
 {
     private QuoteService _service;
     private Mock<IParcelShippingCostCalculator> _parcelCalculatorMock;
+    private Mock<IDiscountEngine> _discountEngineMock;
+
 
     [SetUp]
     public void Setup()
     {
         _parcelCalculatorMock = new Mock<IParcelShippingCostCalculator>();
-        _service = new QuoteService(_parcelCalculatorMock.Object);
+        _discountEngineMock = new Mock<IDiscountEngine>();
+        _service = new QuoteService(_parcelCalculatorMock.Object, _discountEngineMock.Object);
+
+        _discountEngineMock.Setup(x => x.Apply(It.IsAny<IEnumerable<LineItem>>())).Returns(Array.Empty<LineItem>());
     }
 
     [Test]

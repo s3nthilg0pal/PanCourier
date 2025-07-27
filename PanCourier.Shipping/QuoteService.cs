@@ -7,10 +7,12 @@ namespace PanCourier.Shipping;
 public class QuoteService : IQuoteService
 {
     private readonly IParcelShippingCostCalculator _parcelShippingCostCalculator;
+    private readonly IDiscountEngine _discountEngine;
 
-    public QuoteService(IParcelShippingCostCalculator parcelShippingCostCalculator)
+    public QuoteService(IParcelShippingCostCalculator parcelShippingCostCalculator, IDiscountEngine discountEngine)
     {
         _parcelShippingCostCalculator = parcelShippingCostCalculator;
+        _discountEngine = discountEngine;
     }
 
     public Quote CreateQuote(Consignment consignment)
@@ -23,6 +25,16 @@ public class QuoteService : IQuoteService
         lineItems.AddRange(parcelLineItems);
 
         var totalCost = lineItems.Sum(l => l.Cost);
+
+        var discounts = _discountEngine.Apply(lineItems);
+        if (discounts.Any())
+        {
+            lineItems.AddRange(discounts);
+
+            var totalDiscount = discounts.Sum(x => x.Cost);
+
+            totalCost += totalDiscount;
+        }
 
         if (consignment.OptForSpeedyShipping)
         {

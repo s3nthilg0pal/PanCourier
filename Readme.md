@@ -21,6 +21,19 @@ Assuming all the parcel dimensions are fall into a valid size.
 Added a internal type that holds the information about parcel basecost, weight limit, weight surcharge for easy lookup.
 In real world, assuming this data will be stored in a database.
 
+### Discount Engine
+Introduced a skelton code that provide a basic code that does not break existing implemenation.
+
+3 discount rules for Small, medium and mixed.
+
+Added comments in each method to implemet it later.
+
+Each rule returns the cheapest item to discount, and after all rules have been evaluated, a new list of discounted line items is returned.
+
+### Inversion of control
+All the class depends on the interface of the actual implematation.
+We we need to use this in real world, we need to provide dependency injection support
+
 ### Test
 Some of the test are written with the help of AI
 
