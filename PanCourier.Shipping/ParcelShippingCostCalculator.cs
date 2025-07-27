@@ -10,15 +10,14 @@ public class ParcelShippingCostCalculator : IParcelShippingCostCalculator
     {
         var parcelSize = parcel.GetSize();
 
-        var cost = parcelSize switch
+        var lineItem = parcelSize switch
         {
-            Size.Small => 3,
-            Size.Medium => 8,
-            Size.Large => 15,
-            Size.ExtraLarge => 25,
-            _ => 0
+            Size.Small => new LineItem(LineItemType.Small, 3),
+            Size.Medium => new LineItem(LineItemType.Medium, 8),
+            Size.Large => new LineItem(LineItemType.Large, 15),
+            Size.ExtraLarge => new LineItem(LineItemType.ExtraLarge, 25)
         };
 
-        return new LineItem(parcelSize, cost);
+        return lineItem;
     }
 }

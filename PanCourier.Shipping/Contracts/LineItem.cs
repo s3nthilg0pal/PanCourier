@@ -2,4 +2,4 @@
 
 namespace PanCourier.Shipping.Contracts;
 
-public record LineItem(Size Size, double Cost);
+public record LineItem(LineItemType Type, double Cost);
