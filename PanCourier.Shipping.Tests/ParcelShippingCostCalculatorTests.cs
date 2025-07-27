@@ -51,6 +51,8 @@ public class ParcelShippingCostCalculatorTests
     [TestCase(10, 10, 10, 5, LineItemType.Medium, 12)]
     [TestCase(50, 50, 50,7, LineItemType.Large, 17)]
     [TestCase(100, 99, 99,11, LineItemType.ExtraLarge, 27)]
+    [TestCase(100, 99, 99, 51, LineItemType.Heavy, 51)]
+
     public void ShouldHandleWeightCharges(
         double length, double width, double height, double weight, LineItemType expectedSize, double expectedCost)
     {

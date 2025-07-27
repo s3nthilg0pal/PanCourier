@@ -6,6 +6,9 @@ public record Parcel(double LengthCm, double WidthCm, double HeightCm, double We
 {
     public Size GetSize()
     {
+        if (Weight >= 50)
+            return Size.Heavy;
+
         if (LengthCm >= 100 || WidthCm >= 100 || HeightCm >= 100)
             return Size.ExtraLarge;
 

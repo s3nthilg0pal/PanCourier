@@ -12,9 +12,12 @@ public class ParcelShippingCostCalculator : IParcelShippingCostCalculator
         { Size.Medium, new ProductOption(Size.Medium, 8, 3, OverWeightSurcharge) },
         { Size.Large, new ProductOption(Size.Large, 15, 6, OverWeightSurcharge) },
         { Size.ExtraLarge, new ProductOption(Size.ExtraLarge, 25, 10, OverWeightSurcharge) },
+        { Size.Heavy, new ProductOption(Size.Heavy, 50, 50, HeavyWeightSurcharge) },
     };
 
     private const double OverWeightSurcharge = 2;
+    private const double HeavyWeightSurcharge = 1;
+
 
     public LineItem CalculateCost(Parcel parcel)
     {
@@ -38,7 +41,8 @@ public class ParcelShippingCostCalculator : IParcelShippingCostCalculator
             Size.Small => new LineItem(LineItemType.Small, cost),
             Size.Medium => new LineItem(LineItemType.Medium, cost),
             Size.Large => new LineItem(LineItemType.Large, cost),
-            Size.ExtraLarge => new LineItem(LineItemType.ExtraLarge, cost)
+            Size.ExtraLarge => new LineItem(LineItemType.ExtraLarge, cost),
+            Size.Heavy => new LineItem(LineItemType.Heavy, cost)
         };
 
         return lineItem;
