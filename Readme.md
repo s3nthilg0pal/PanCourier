@@ -17,6 +17,9 @@ Output of the Quote Service is `Quote` with collection of `lineItems` and total 
 ### Parcel
 Assuming all the parcel dimensions are fall into a valid size.
 
+### Product Option
+Added a internal type that holds the information about parcel basecost, weight limit, weight surcharge for easy lookup
+
 ### Test
 Some of the test are written with the help of AI
 

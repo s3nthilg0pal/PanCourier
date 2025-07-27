@@ -47,4 +47,21 @@ public class ParcelShippingCostCalculatorTests
         Assert.That(result.Type, Is.EqualTo(expectedSize));
         Assert.That(result.Cost, Is.EqualTo(expectedCost));
     }
+
+    [TestCase(10, 10, 10, 5, LineItemType.Medium, 12)]
+    [TestCase(50, 50, 50,7, LineItemType.Large, 17)]
+    [TestCase(100, 99, 99,11, LineItemType.ExtraLarge, 27)]
+    public void ShouldHandleWeightCharges(
+        double length, double width, double height, double weight, LineItemType expectedSize, double expectedCost)
+    {
+        // Arrange
+        var parcel = new Parcel(length, width, height, weight);
+
+        // Act
+        var result = _parcelShippingCostCalculator.CalculateCost(parcel);
+
+        // Assert
+        Assert.That(result.Type, Is.EqualTo(expectedSize));
+        Assert.That(result.Cost, Is.EqualTo(expectedCost));
+    }
 }
